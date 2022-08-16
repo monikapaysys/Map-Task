@@ -1,0 +1,299 @@
+import React, {useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Screen from './Screen';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+// import Icon from 'react-native-vector-icons/AntDesign';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Button,
+  Modal,
+  StatusBar,
+  Pressable,
+  Switch,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+} from 'react-native';
+import logo from './logo.png';
+
+// import auth from '@react-native-firebase/auth';
+
+import LottieView from 'lottie-react-native';
+
+const YourApp = ({navigation}) => {
+  const [show, setshow] = useState(false);
+  const [state, setstate] = useState(false);
+  const [visible, setvisible] = useState(false);
+  const [text, settext] = useState('');
+  const [pass, setpass] = useState('');
+
+  const validate = () => {
+    if (text == '') {
+      alert('Enter valid email');
+    } else if (pass == '') {
+      alert('Enter valid password');
+    } else {
+      navigation.navigate('Screen');
+    }
+
+    //  alert('welcome to screen!');
+  };
+
+  return (
+    <KeyboardAvoidingView style={{flex: 1}}>
+      <View style={styles.container}>
+        <StatusBar backgroundColor={'#000'} barStyle="light-content" />
+        <Image source={logo} style={styles.logo} />
+
+        <View
+          style={{
+            margin: 20,
+          }}>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#dcdcdc"
+            placeholder={'Email or Phone'}
+            onChangeText={settext}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#dcdcdc"
+            placeholder={'Password'}
+            secureTextEntry={visible}
+            onChangeText={setpass}
+          />
+
+          <TouchableOpacity
+            onPress={() => {
+              setvisible(!visible);
+              setshow(!show);
+            }}>
+            <FontAwesome
+
+            
+              Icon
+              name={setshow ? 'eye-slash' : 'eye'}
+              style={{
+                width: 20,
+                height: 20,
+                //backgroundColor: 'white',
+                borderRadius: 20,
+                left: 300,
+                bottom: 30,
+                fontSize: 20,
+              }}
+            />
+            {/* <AntDesign
+              Icon
+              name={'eyeo'}
+              style={{
+                width: 20,
+                height: 20,
+                //backgroundColor: 'white',
+                borderRadius: 20,
+                left: 300,
+                bottom: 30,
+                fontSize: 20,
+              }}
+            /> */}
+            {/* <Image
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: 'white',
+                borderRadius: 20,
+                left: 300,
+                bottom: 30,
+              }}
+              source={require('./imgs/eye.png')}
+            /> */}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              validate();
+            }}
+            style={styles.button}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: 'white',
+                fontWeight: '500',
+              }}>
+              Log In
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.pass, {marginTop: 50}]}
+            onPress={({}) => {
+              // alert('hi');
+
+              setstate(true);
+            }}>
+            <Text style={styles.txt}>Sign up for Facebook</Text>
+          </TouchableOpacity>
+
+          <View style={styles.FP}>
+            <TouchableOpacity
+              style={styles.pass}
+              onPress={({}) => {
+                // alert('hi');
+
+                setstate(true);
+              }}>
+              <Text style={styles.txt}>Forget Password</Text>
+            </TouchableOpacity>
+
+            <Image
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: 'white',
+                borderRadius: 20,
+                position: 'absolute',
+                right: 20,
+                bottom: 0,
+              }}
+              source={{
+                uri: 'https://pngimg.com/uploads/question_mark/small/question_mark_PNG78.png',
+              }}
+            />
+          </View>
+
+          {/* <LottieView
+            source={require('./imgs/loader.json')}
+            autoPlay
+            style={{backgroundColor: 'transparent'}}
+          /> */}
+
+          {/* <Modal animationType="none" visible={state}>
+          <Text
+            onPress={() => {
+              setstate(false);
+            }}>
+            Signup Form
+          </Text>
+        </Modal>
+
+        {/* <Pressable
+          onPress={() => {
+            alert('se');
+          }}>
+          <Text>I'm pressable!</Text>
+        </Pressable> */}
+
+          {/* <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+           ios_backgroundColor="#3e3e3e"
+           onValueChange={toggleSwitch}
+          value={isEnabled}
+        /> */}
+          {/* <ActivityIndicator /> */}
+          {/* <ActivityIndicator size="large" /> */}
+          {/* <ActivityIndicator size="small" color="#0000ff" /> */}
+          {/* <ActivityIndicator size="large" color="#00ff00" /> */}
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    margintop: 50,
+    backgroundColor: '#4267B2',
+    flex: 1,
+
+    justifyContent: 'center',
+  },
+  logo: {
+    height: 80,
+    width: 80,
+    alignSelf: 'center',
+    marginTop: 20,
+    backgroundColor: 'white',
+    borderRadius: 40,
+  },
+
+  input: {
+    height: 40,
+    marginTop: 50,
+    borderRadius: 25,
+    fontSize: 20,
+    paddingLeft: 20,
+    color: 'white',
+    // marginHorizontal:30,
+
+    borderBottomWidth: 1,
+    borderBottomColor: '#fdf5e6',
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#6E85B7',
+    padding: 20,
+    marginTop: 60,
+  },
+  pass: {
+    marginTop: 30,
+    fontSize: 25,
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+
+  txt: {
+    color: 'white',
+  },
+  FP: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="YourApp"
+          component={YourApp}
+        />
+        <Stack.Screen name="Screen" component={Screen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+unsplash
